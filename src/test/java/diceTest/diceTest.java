@@ -1,4 +1,4 @@
-package src.test.java.rulesTest;
+package diceTest;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
