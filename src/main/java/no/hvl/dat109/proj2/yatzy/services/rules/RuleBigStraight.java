@@ -10,10 +10,10 @@ import java.util.List;
 public class RuleBigStraight implements RulesADT {
 
 	@Override
-	public int calculate(List<Integer> keep) {
+	public int calculate(List<Integer> list) {
 		int score = 0;
 		for(int i = 2; i < 7; i++) {
-			if(keep.get(keep.indexOf(i)) == i){
+			if(list.get(list.indexOf(i)) == i){
 				score = score +1;
 			}
 			if(score >=5) {
