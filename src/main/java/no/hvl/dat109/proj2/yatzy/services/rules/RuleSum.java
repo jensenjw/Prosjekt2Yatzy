@@ -1,5 +1,7 @@
 package no.hvl.dat109.proj2.yatzy.services.rules;
 
+import java.util.List;
+
 public class RuleSum implements RulesADT {
 
 	private final int expectedDiceValue;
@@ -9,7 +11,7 @@ public class RuleSum implements RulesADT {
 	}
 	
 	@Override
-	public int calculate(int[] diceValues) {
+	public int calculate(List<Integer> diceValues) {
 		int sum = 0;
 		for (int value : diceValues) {
 			if (value == expectedDiceValue) {
