@@ -26,6 +26,10 @@ public class Player {
 	 */
 
 	
+	public Player () {
+		
+	}
+	
 	public Player(String username, String password, String name) {
 		this.username = username;
 		this.password = password;
@@ -46,9 +50,6 @@ public class Player {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getUsername() {
 		return username;
