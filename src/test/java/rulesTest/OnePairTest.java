@@ -2,9 +2,12 @@ package rulesTest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 
-import no.hvl.dat109.proj2.yatzy.services.rules.RuleSum;
+import no.hvl.dat109.proj2.yatzy.services.rules.RuleOnePair;
 import no.hvl.dat109.proj2.yatzy.services.rules.RulesADT;
 
 public class OnePairTest {
@@ -15,7 +18,7 @@ public class OnePairTest {
 	public void OnePair_NoPair_Return0() {
 		
 		//Arrange
-		int[] dices = new int[] {1, 2, 3, 4, 5};
+		List<Integer> dices = Arrays.asList(1, 2, 3, 4, 5);
 		
 		//Act
 		int sum = onePair.calculate(dices);
@@ -28,7 +31,7 @@ public class OnePairTest {
 	public void OnePair_Pair1_Return2() {
 		
 		//Arrange
-		int[] dices = new int[] {1, 1, 3, 4, 5};
+		List<Integer> dices = Arrays.asList(1, 1, 3, 4, 5);
 		
 		//Act
 		int sum = onePair.calculate(dices);
