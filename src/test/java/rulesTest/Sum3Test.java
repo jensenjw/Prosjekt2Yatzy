@@ -2,6 +2,9 @@ package rulesTest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 
 import no.hvl.dat109.proj2.yatzy.services.rules.RuleSum;
@@ -14,7 +17,7 @@ public class Sum3Test {
 	public void RuleSum_3Threes_Returns9() {
 		
 		//Arrange
-		int[] dices = new int[] {6, 3, 3, 3, 1};
+		List<Integer> dices = Arrays.asList(6, 3, 3, 3, 1);
 		
 		//Act
 		int sum = sumRule.calculate(dices);
@@ -27,7 +30,7 @@ public class Sum3Test {
 	public void RuleSum_0Threes_Returns0() {
 		
 		//Arrange
-		int[] dices = new int[] {4, 1, 5, 2, 6};
+		List<Integer> dices = Arrays.asList(4, 1, 5, 2, 6);
 		
 		//Act
 		int sum = sumRule.calculate(dices);
@@ -40,7 +43,7 @@ public class Sum3Test {
 	public void RuleSum_5Threes_Returns15() {
 		
 		//Arrange
-		int[] dices = new int[] {3, 3, 3, 3, 3};
+		List<Integer> dices = Arrays.asList(3, 3, 3, 3, 3);
 		
 		//Act
 		int sum = sumRule.calculate(dices);
