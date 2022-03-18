@@ -2,6 +2,9 @@ package rulesTest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 
 import no.hvl.dat109.proj2.yatzy.services.rules.RuleSum;
@@ -14,7 +17,7 @@ private static final RulesADT sumRule = new RuleSum(2);
 	public void RuleSum_3Twos_Returns6() {
 		
 		//Arrange
-		int[] dices = new int[] {2, 2, 1, 3, 2};
+		List<Integer> dices = Arrays.asList(2, 2, 1, 3, 2);
 		
 		//Act
 		int sum = sumRule.calculate(dices);
@@ -27,7 +30,7 @@ private static final RulesADT sumRule = new RuleSum(2);
 	public void RuleSum_0Twos_Returns0() {
 		
 		//Arrange
-		int[] dices = new int[] {4, 1, 5, 3, 6};
+		List<Integer> dices = Arrays.asList(4, 1, 5, 3, 6);
 		
 		//Act
 		int sum = sumRule.calculate(dices);
@@ -40,7 +43,7 @@ private static final RulesADT sumRule = new RuleSum(2);
 	public void RuleSum_5Twos_Returns10() {
 		
 		//Arrange
-		int[] dices = new int[] {2, 2, 2, 2, 2};
+		List<Integer> dices = Arrays.asList(2, 2, 2, 2, 2);
 		
 		//Act
 		int sum = sumRule.calculate(dices);
