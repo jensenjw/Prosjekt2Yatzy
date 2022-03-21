@@ -2,8 +2,12 @@ package rulesTest;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 
+import no.hvl.dat109.proj2.yatzy.services.rules.RuleFourOfAKind;
 import no.hvl.dat109.proj2.yatzy.services.rules.RulesADT;
 
 public class FourOfAKindTest {
@@ -14,7 +18,7 @@ public class FourOfAKindTest {
 	public void FourOfAKind_Quad1_Return4() {
 		
 		//Arrange 
-		int[] dices = new int[] {1, 1, 1, 1, 3};
+		List<Integer >dices = Arrays.asList(1, 1, 1, 1, 3);
 		
 		//Act
 		int sum = fourOfAKind.calculate(dices);
@@ -28,7 +32,7 @@ public class FourOfAKindTest {
 	public void FourOfAKind_NoQuads_Return0() {
 		
 		//Arrange
-		int[] dices = new int[] {1,2,3,4,5};
+		List<Integer >dices = Arrays.asList(1,2,3,4,5);
 		
 		//Act
 		int sum = fourOfAKind.calculate(dices);
@@ -42,7 +46,7 @@ public class FourOfAKindTest {
 	public void FourOfAKind_Quad4_Return16() {
 		
 		//Arrange 
-		int[] dices = new int[] {4, 4, 4, 4, 3};
+		List<Integer >dices = Arrays.asList(4, 4, 4, 4, 3);
 		
 		//Act
 		int sum = fourOfAKind.calculate(dices);
