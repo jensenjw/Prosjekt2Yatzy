@@ -1,13 +1,19 @@
 package no.hvl.dat109.proj2.yatzy.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * 
  * @author Eric 
  * Player klassen er et spiller objekt
  */
-
+@Entity
+@Table(schema = "yatzy", name = "player")
 public class Player {
 
+	@Id
 	int id; // tregner ikke genere noe verdi for den databasen gjør det selv, bare ha get og set id metodene
 	String username;
 	String password;

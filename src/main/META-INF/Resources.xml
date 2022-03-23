@@ -4,8 +4,8 @@
 	<Resource type="javax.sql.DataSource" name="Prosjekt2Resources"
 		id="Prosjekt2Resources">
 		jdbcDriver = org.postgresql.Driver
-		jdbcUrl = 
-		userName = 
-		password = 
+		jdbcUrl = ider-database.westeurope.cloudapp.azure.com:5432
+		userName = h572018
+		password = pass
 	</Resource>
 </resources>

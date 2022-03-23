@@ -3,12 +3,11 @@
 	version="2.0"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<persistence-unit transaction-type="JTA"
-		name="registrationPU">
+	<persistence-unit transaction-type="JTA" name="PU">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<jta-data-source>oblig4Resources</jta-data-source>
-		<class>entities.Participant</class>
-
+		<jta-data-source>Prosjekt2Resources</jta-data-source>
+		<class>no.hvl.dat109.proj2.yatzy.entities.Player</class>
+		
 		<properties>
 			<property name="eclipselink.weaving" value="false" />
 		</properties>
