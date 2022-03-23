@@ -17,7 +17,7 @@ import no.hvl.dat109.proj2.yatzy.entities.Player;
 
 
 @WebServlet(
-        name = "RegistrationServlet",
+        name = "Registration",
         urlPatterns = "/Registration"
 )
 public class RegistrationServlet extends HttpServlet {
