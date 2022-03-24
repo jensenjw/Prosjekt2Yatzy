@@ -11,7 +11,7 @@ import no.hvl.dat109.proj2.yatzy.entities.Player;
 @Stateless
 public class PlayerDAO {
 
-	@PersistenceContext(name = "PU")
+	@PersistenceContext(name = "YatzyPU")
 	private EntityManager em; 
 	public PlayerDAO() {
 		

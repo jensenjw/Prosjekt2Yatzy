@@ -16,15 +16,12 @@ import no.hvl.dat109.proj2.yatzy.daos.PlayerDAO;
 import no.hvl.dat109.proj2.yatzy.entities.Player;
 
 
-@WebServlet(
-        name = "Registration",
-        urlPatterns = "/Registration"
-)
+@WebServlet("/Registration")
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	PlayerDAO dao;
+	private PlayerDAO dao;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
