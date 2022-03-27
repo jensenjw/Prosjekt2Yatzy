@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- style på hvordan teksten og knappene skal se ut. container padding lagt til slik at user name og passord er adskilt fra resten  -->
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+	border: 3px solid #f1f1f1;
+}
+
+input[type=text], input[type=password] {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+button {
+	background-color: #04AA6D;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+.container {
+	padding: 16px;
+}
+</style>
+
+<meta charset="ISO-8859-1">
+<title>Front page</title>
+</head>
+<body>
+
+	<!-- Title inn på siden -->
+	<h2>User login and Registration</h2>
+
+	<div class="container">
+
+		<!-- Tekstfelt for Brukernavn -->
+		<label for="username"><b>Username</b></label> <input type="text"
+			placeholder="Enter Username" name="username" required>
+
+		<!-- Tekstfelt for passord -->
+		<label for="password"><b>Password</b></label> <input type="password"
+			placeholder="Enter Password" name="password" required>
+
+		<!-- login knapp -->
+		<button type="submit">Login</button>
+
+		<!-- regestrerings knapp -->
+		<form action="Registration" method="get">
+			<button type="submit">Registration</button>
+		</form>
+		
+	</div>
+
+</body>
+</html>
