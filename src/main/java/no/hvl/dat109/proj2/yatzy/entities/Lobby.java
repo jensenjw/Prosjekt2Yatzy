@@ -10,9 +10,9 @@ import java.util.List;
 
 public class Lobby {
 	
-	int id;
-	List <Player> players;
-	List <Player> viewers;
+	public int id;
+	public List <Player> players;
+	public List <Player> viewers;
 	
 	/**
 	 * @param id er id til lobbyene
