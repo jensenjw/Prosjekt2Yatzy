@@ -1,17 +1,25 @@
 package no.hvl.dat109.proj2.yatzy.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * 
  * @author Eric 
  * Player klassen er et spiller objekt
  */
-
+@Entity
+@Table(schema = "yatzy", name ="player")
 public class Player {
+
 
 	int playerId; // tregner ikke genere noe verdi for den databasen gjør det selv, bare ha get og set id metodene
 	String username;
 	String password;
-	String name;
+	String fullname;
 	String email;
 	int lobbyId;
 	int warnings = 0;
@@ -34,30 +42,18 @@ public class Player {
 		
 	}
 	
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public int getLobbyId() {
-		return lobbyId;
-	}
-
-	public void setLobbyId(int lobbyId) {
-		this.lobbyId = lobbyId;
-	}
-
-	public Player(String username, String password, String name) {
+	public Player(String username, String fullname, String email, String password) {
 		this.username = username;
 		this.password = password;
-		this.name = name;
-		this.score = new Score();		
+		this.fullname = fullname;
+		this.email = email;
 
 	}
 
+	public int getWarning() {
+		return warning;
+	}
 	public Score getScore() {
 		return score;
 	}
@@ -87,18 +83,29 @@ public class Player {
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
+
+	public String getFullname() {
+		return fullname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+  
+	public String getEmail() {
+		return email;
 	}
 
-	public int getWarning() {
-		return warnings;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
-	
+
+	public int getLobbyId() {
+		return lobbyId;
+	}
+
+	public void setLobbyId(int lobbyId) {
+		this.lobbyId = lobbyId;
+	}
 
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+	<Resource type="javax.sql.DataSource" name="Prosjekt2Resources"
+		id="Prosjekt2Resources">
+		
+		jdbcDriver = org.postgresql.Driver
+		jdbcUrl = jdbc:postgresql://localhost:5432/dat109
+		userName = postgres
+		password = postgres
+		<!-- 
+		jdbcDriver = org.postgresql.Driver
+		jdbcUrl = ider-database.westeurope.cloudapp.azure.com:5432
+		userName = h572018
+		password = pass -->
+	</Resource>
+</resources>

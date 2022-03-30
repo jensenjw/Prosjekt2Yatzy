@@ -1,12 +1,22 @@
 package no.hvl.dat109.proj2.yatzy.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * 
  * @author Eric
  * Score er et poengkort objekt
  */
 
+@Entity
+@Table(schema = "yatzy", name = "player")
 public class Score {
+	
+	@Id
+	int playerId;
 	
 	// Arraylist for poeng 
 		int [] score;
