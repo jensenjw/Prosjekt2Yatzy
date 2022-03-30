@@ -12,18 +12,17 @@ import javax.persistence.Table;
  * Player klassen er et spiller objekt
  */
 @Entity
-@Table(schema = "yatzy", name = "player")
+@Table(schema = "yatzy", name ="player")
 public class Player {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int playerId; // tregner ikke genere noe verdi for den databasen gjør det selv, bare ha get og set id metodene
 	String username;
-//	String password;
-//	String fullname;
-//	String email;
-//	int warning = 0;
-//	Score score; 
+	String password;
+	String fullname;
+	String email;
+	int warning = 0;
+	Score score; 
 
 	/**
 	 * @param id er iden på hvilken spiller dette er, altså 1,2,3 eller 4 f.eks
@@ -39,30 +38,25 @@ public class Player {
 	public Player () {
 		
 	}
-	public Player(String username) {
-		this.username = username;
-//		
-
-	}
 	
 	public Player(String username, String fullname, String email, String password) {
 		this.username = username;
-//		this.password = password;
-//		this.fullname = fullname;
-//		this.email = email;
+		this.password = password;
+		this.fullname = fullname;
+		this.email = email;
 
 	}
 
-//	public int getWarning() {
-//		return warning;
-//	}
-//	public Score getScore() {
-//		return score;
-//	}
-//
-//	public void setScore(Score score) {
-//		this.score = score;
-//	}
+	public int getWarning() {
+		return warning;
+	}
+	public Score getScore() {
+		return score;
+	}
+
+	public void setScore(Score score) {
+		this.score = score;
+	}
 
 	public int getId() {
 		return playerId;
@@ -77,32 +71,32 @@ public class Player {
 		this.username = username;
 	}
 
-//	public String getPassword() {
-//		return password;
-//	}
-//
-//	public void setPassword(String password) {
-//		this.password = password;
-//	}
-//
-//	
-//
-//	public String getFullname() {
-//		return fullname;
-//	}
-//
-//	public void setFullname(String fullname) {
-//		this.fullname = fullname;
-//	}
-//
-//	public String getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
-//	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	
 
 }

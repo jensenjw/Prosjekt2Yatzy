@@ -14,7 +14,7 @@ class formcontroller {
 		rootEl.querySelector("div[data-info='submit']").classList.add("formcontroller_hidden");
 
 		/* sjekke fornavn*/
-		const fornavn = rootEl.querySelector("input[name='firstname']");
+		const fornavn = rootEl.querySelector("input[name='username']");
 		fornavn.addEventListener("input", function() {
 			if (this.value.length >= 2 && this.value.length <= 20) {
 				this.classList.add('formcontroller_validInput');
@@ -26,7 +26,7 @@ class formcontroller {
 		});
 
 		/*sjekke etternavn*/
-		const etternavn = rootEl.querySelector("input[name='lastname']");
+		const etternavn = rootEl.querySelector("input[name='fullname']");
 		etternavn.addEventListener("input", function() {
 			if (this.value.length >= 2 && this.value.length <= 20) {
 				this.classList.add('formcontroller_validInput');
@@ -38,7 +38,7 @@ class formcontroller {
 		});
 
 		/*sjekke mobil*/
-		const mobil = rootEl.querySelector("input[name='mobile']");
+		const mobil = rootEl.querySelector("input[name='email']");
 		mobil.addEventListener("input", function() {
 			if (this.value.length == 8 && !isNaN(this.value)) {
 				this.classList.add('formcontroller_validInput');
