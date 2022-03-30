@@ -3,11 +3,14 @@ package no.hvl.dat109.proj2.yatzy.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import no.hvl.dat109.proj2.yatzy.services.SessionUtil;
 
 /**
  * Servlet implementation class YatzyBrettServlet
@@ -15,6 +18,10 @@ import javax.servlet.http.HttpSession;
 public class YatzyBrettServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	
+	@EJB
+	private SessionUtil sessionUtil;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,24 +37,20 @@ public class YatzyBrettServlet extends HttpServlet {
 		
 		//TODO: det må assosieres et spill med en bruker,
 	
-		HttpSession session = request.getSession(false);
+		String gameId = sessionUtil.getCurrentGameId(request);
 		
-		if (session == null) {
-			//Returner feilmelding
+		if (gameId == null) {
+			response.encodeRedirectURL("/");
 		}
 		else {
-			if (session.getAttribute("gameId") == null) {
-				//Returner feilmelding
-			}
+			ArrayList<String> players = new ArrayList<String>();
+			
+			players.add("Geir");
+			players.add("Knut");
+			
+			request.setAttribute("players",players);
+			getServletContext().getRequestDispatcher("/WEB-INF/YatzyBrett.jsp").forward(request, response);
 		}
-		
-		ArrayList<String> players = new ArrayList<String>();
-		
-		players.add("Geir");
-		players.add("Knut");
-		
-		request.setAttribute("players",players);
-		getServletContext().getRequestDispatcher("/WEB-INF/YatzyBrett.jsp").forward(request, response);
 	}
 
 	/**

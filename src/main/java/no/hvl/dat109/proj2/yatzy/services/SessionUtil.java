@@ -9,6 +9,5 @@ public class SessionUtil {
 		HttpSession session = request.getSession(false);
 		
 		return session != null ? (String)session.getAttribute("gameId") : null;
-	}
-	
+	}	
 }
