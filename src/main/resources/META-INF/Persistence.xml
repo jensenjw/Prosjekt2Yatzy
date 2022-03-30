@@ -8,7 +8,7 @@
 		<jta-data-source>Prosjekt2Resources</jta-data-source>
 		<class>no.hvl.dat109.proj2.yatzy.entities.Player</class>
 		<class>no.hvl.dat109.proj2.yatzy.entities.Score</class>
-		
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<property name="eclipselink.weaving" value="false" />
 		</properties>

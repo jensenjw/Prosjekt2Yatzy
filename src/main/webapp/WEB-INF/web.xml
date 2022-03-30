@@ -4,6 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>PlayerServlet</servlet-name>
+  	<display-name>PlayerServlet</display-name>
+  	<description></description>
+  	<servlet-class>no.hvl.dat109.proj2.yatzy.servlets.PlayerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PlayerServlet</servlet-name>
+  	<url-pattern>/PlayerServlet</url-pattern>
+  </servlet-mapping>
   <!-- <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
