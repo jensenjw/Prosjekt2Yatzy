@@ -16,6 +16,7 @@ import javax.persistence.Table;
 public class Player {
 
 
+	@Id
 	int playerId; // tregner ikke genere noe verdi for den databasen gjør det selv, bare ha get og set id metodene
 	String username;
 	String password;
