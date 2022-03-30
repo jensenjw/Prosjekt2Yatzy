@@ -52,7 +52,7 @@ public class Player {
 	}
 
 	public int getWarning() {
-		return warning;
+		return warnings;
 	}
 	public Score getScore() {
 		return score;
