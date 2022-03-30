@@ -15,20 +15,23 @@ import javax.persistence.Table;
 @Table(schema = "yatzy", name ="player")
 public class Player {
 
-	@Id
+
 	int playerId; // tregner ikke genere noe verdi for den databasen gjør det selv, bare ha get og set id metodene
 	String username;
 	String password;
 	String fullname;
 	String email;
-	int warning = 0;
+	int lobbyId;
+	int warnings = 0;
 	Score score; 
 
 	/**
-	 * @param id er iden på hvilken spiller dette er, altså 1,2,3 eller 4 f.eks
+	 * @param playerId er iden på hvilken spiller dette er, altså 1,2,3 eller 4 f.eks
 	 * @param username er bruker navnet til spilleren
 	 * @param password passordet som brukeren lager for å kunne logge inn
 	 * @param name     navnet på personen som lagde brukeren
+	 * @param email    er e-post til spilleren
+	 * @param lobbyId  er id til lobbyen som spilleren er i
 	 * @param warning  er antall purringer eller annmerkinger en bruker kan ha før
 	 *                 den blir kastet ut av en lobby
 	 *  @param score er spillerens poengkort
@@ -39,6 +42,7 @@ public class Player {
 		
 	}
 	
+
 	public Player(String username, String fullname, String email, String password) {
 		this.username = username;
 		this.password = password;
@@ -79,7 +83,6 @@ public class Player {
 		this.password = password;
 	}
 
-	
 
 	public String getFullname() {
 		return fullname;
@@ -88,7 +91,7 @@ public class Player {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-
+  
 	public String getEmail() {
 		return email;
 	}
@@ -96,7 +99,13 @@ public class Player {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+	public int getLobbyId() {
+		return lobbyId;
+	}
+
+	public void setLobbyId(int lobbyId) {
+		this.lobbyId = lobbyId;
+	}
 
 }
