@@ -72,7 +72,15 @@ public class GameManagerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doGet(request, response);
+		String act = request.getParameter("act");
+		if (act != null) {
+			if (act.equals("roll")) {
+				//TODO roll logic
+			}
+			else {
+				//TODO andre acts
+			}
+		}
 	}
 
 }

@@ -49,6 +49,13 @@ function start(players){
         return row;
     }
 
+    /**
+     * 
+     * @param {string} method GET eller POST
+     * @param {string} url endepunktet vi skal snakke med
+     * @param {string?} body json som skal sendes med hvis det er en post
+     * @returns {string | null}
+     */
     function send_http_request(method, url, body = null){
         var xhttp = new XMLHttpRequest();
         xhttp.open(method, url,false);
@@ -91,12 +98,37 @@ function start(players){
         }
     }
 
+    function get_keep_checkbox(name){
+        /**
+         * @type {HTMLInputElement}
+         */
+        const x = document.getElementsByName(name)[0];
+        return x;
+    }
+
+    function get_keep_states(){
+        return [
+            get_keep_checkbox("keep_1").value,
+            get_keep_checkbox("keep_2").value,
+            get_keep_checkbox("keep_3").value,
+            get_keep_checkbox("keep_4").value,
+            get_keep_checkbox("keep_5").value,
+        ]
+    }
+
+    function roll_dices(){
+        send_http_request("POST","game?act=roll",{
+            keep: get_keep_states()
+        });
+    }
 
     //MAIN LOGIC
 
     create_game_board();
     
     fetch_game_state();
+
+    document.getElementById("roll").onclick = roll_dices;
 
     let old = performance.now();
     function runner(){

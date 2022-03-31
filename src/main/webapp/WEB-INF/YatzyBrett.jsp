@@ -60,6 +60,12 @@
 	    				<input type="checkbox" name="keep_1">
 	    				</div>
 	    			</div>
+	    			
+	    			<div>
+	    				<button id = "roll">
+	    					Rull terninger
+	    				</button>
+	    			</div>
 	    		</div>
 	    	</div>		
     	</div>
