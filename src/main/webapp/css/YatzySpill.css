@@ -1,0 +1,35 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container{
+    width: 100%;
+}
+
+.container>div{
+    float: left;
+    min-width: fit-content;
+}
+
+#game_panel>h1,#game_panel>h2{
+    text-align: center;
+}
+#game_panel>#game_controllers{
+    border: 1px solid grey;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+#game_board>.header{
+    background-color: lightslategrey;
+    font-weight: 700;
+}
+
+#game_board>tr>td{
+    padding: 1em;
+    text-align: center;
+    min-width: 100px;
+    border: 1px solid black;
+}
