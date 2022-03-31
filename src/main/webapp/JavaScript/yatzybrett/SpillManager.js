@@ -22,12 +22,15 @@ function start(players){
 
         const board_body = document.getElementById("game_board");
         board_body.appendChild(create_header_row(players));
-        for (const x of ROUND_NAMES){
+        for (const x in ROUND_NAMES){
+            const name = ROUND_NAMES[x];
             const row = document.createElement("tr");
             const title = row.appendChild(document.createElement("td"));
-            title.innerText = x;
+            title.innerText = name;
+
             for (let i = 0; i < player_count; i++){
                 const cell = row.appendChild(document.createElement("td"));
+                cell.id = "score_" + players[i] + "_" + x;
             }
             
             board_body.appendChild(row);
@@ -36,7 +39,7 @@ function start(players){
 
     function create_header_row(players){
         const row = document.createElement("tr");
-        row.classList.add("game_board_header");
+        row.classList.add("header");
         const title = row.appendChild(document.createElement("td"));
         title.innerText = "Spillere";
         for (const x of players){
@@ -46,11 +49,65 @@ function start(players){
         return row;
     }
 
+    function send_http_request(method, url, body = null){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open(method, url,false);
+
+        let content = null;
+
+        xhttp.onload = (e) => {
+            if ((~~(xhttp.status / 100)) != 2){
+                throw new Error("Recieved " + xhttp.status + ": " + xhttp.statusText + " from server");
+            }
+            else{
+                content = xhttp.responseText;
+            }
+        }
+        if (body != null || body != undefined)
+        {
+            xhttp.send(body);
+        }
+        else{
+            xhttp.send();
+        }
+        return content;
+    }
+
+    function fetch_game_state(){
+        const json = send_http_request("GET","game");
+
+        const obj = JSON.parse(json);
+
+        for (const x in obj.scores){
+            for (const y in obj.scores[x]){
+                const id = "score_" + x + "_" + y;
+
+                const cell = document.getElementById(id);
+                if (!!cell){
+                    const value = obj.scores[x][y];
+                    cell.innerText = value >= 0 ? value.toString() : "";
+                }
+            }
+        }
+    }
 
 
     //MAIN LOGIC
 
     create_game_board();
+    
+    fetch_game_state();
 
+    let old = performance.now();
+    function runner(){
+        let cur = performance.now();
+        if (cur - old > 2000){
+            old = cur;
+            fetch_game_state();
+        }
+
+        requestAnimationFrame(runner);
+    }
+    runner();
 
 }

@@ -1,10 +1,17 @@
 package no.hvl.dat109.proj2.yatzy.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import no.hvl.dat109.proj2.yatzy.entities.json.YatzySpillJson;
 
 /**
  * Servlet implementation class GameManagerServlet
@@ -26,9 +33,34 @@ public class GameManagerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HashMap<String, ArrayList<Integer>> scores = new HashMap<String, ArrayList<Integer>>();
+
+		ArrayList<Integer> geirScore = new ArrayList<Integer>();
 		
+		geirScore.add(1); //1
+		geirScore.add(2); //2
+		geirScore.add(3); //3
+		geirScore.add(4); //4
+		geirScore.add(5); //5
+		geirScore.add(6); //6
+		geirScore.add(7); //1 par
+		geirScore.add(8); //2 par
+		geirScore.add(9); //3 like
+		geirScore.add(0); //4 like
+		geirScore.add(-1); //liten
+		geirScore.add(-1); //stor
+		geirScore.add(-1); //sjanse
+		geirScore.add(-1); //yatzy
+		geirScore.add(-1); //sum
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		scores.put("Geir", geirScore);
+		scores.put("Knut", geirScore);
+		scores.put("Kåre", geirScore);
+		
+		String json = new Gson().toJson(new YatzySpillJson(scores));
+		
+		response.getWriter().print(json);
+		response.setContentType("application/json");
 	}
 
 	/**

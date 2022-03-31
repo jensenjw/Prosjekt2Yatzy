@@ -39,7 +39,7 @@ public class YatzyBrettServlet extends HttpServlet {
 	
 		String gameId = sessionUtil.getCurrentGameId(request);
 		
-		if (gameId == null) {
+		if (false) {
 			response.encodeRedirectURL("/");
 		}
 		else {
@@ -47,6 +47,7 @@ public class YatzyBrettServlet extends HttpServlet {
 			
 			players.add("Geir");
 			players.add("Knut");
+			players.add("Kåre");
 			
 			request.setAttribute("players",players);
 			getServletContext().getRequestDispatcher("/WEB-INF/YatzyBrett.jsp").forward(request, response);
