@@ -9,12 +9,61 @@
     	<link rel="stylesheet" href="<%out.println(request.getContextPath());%>/css/YatzySpill.css">
     </head>
     <body>
-        <table>
-            <tbody id="game_board">
-            </tbody>
-        </table>
-
-        <script src="<%out.println(request.getContextPath());%>/JavaScript/yatzybrett/SpillManager.js"></script>
+    	<div class="container">
+	    	<div>
+		   		<table>
+		            <tbody id="game_board">
+		            </tbody>
+		        </table>
+	    	</div>
+	    	<div id="game_panel">
+	    		<h1>Runde: <span id="round_title">En-ere</span></h1>
+	    		<h2 id="cur_player">Kåre</h2>
+	    		<div id="game_controllers">
+	    	
+	    			<div id="dice_container">
+	    				<div class="dice" id="1">
+	    				<p>2</p>
+	    				<label for="keep_1">behold?</label>
+	    				<input type="checkbox" name="keep_1">
+	    				</div>
+	    			</div>
+	    			
+	    			<div id="dice_container">
+	    				<div class="dice" id="2">
+	    				<p>2</p>
+	    				<label for="keep_1">behold?</label>
+	    				<input type="checkbox" name="keep_1">
+	    				</div>
+	    			</div>
+	    			
+	    			<div id="dice_container">
+	    				<div class="dice" id="3">
+	    				<p>2</p>
+	    				<label for="keep_1">behold?</label>
+	    				<input type="checkbox" name="keep_1">
+	    				</div>
+	    			</div>
+	    			
+	    			<div id="dice_container">
+	    				<div class="dice" id="4">
+	    				<p>2</p>
+	    				<label for="keep_1">behold?</label>
+	    				<input type="checkbox" name="keep_1">
+	    				</div>
+	    			</div>
+	    			
+	    			<div id="dice_container">
+	    				<div class="dice" id="5">
+	    				<p>2</p>
+	    				<label for="keep_1">behold?</label>
+	    				<input type="checkbox" name="keep_1">
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>		
+    	</div>
+    	<script src="<%out.println(request.getContextPath());%>/JavaScript/yatzybrett/SpillManager.js"></script>
         <script>
         	start(
 			[<%
