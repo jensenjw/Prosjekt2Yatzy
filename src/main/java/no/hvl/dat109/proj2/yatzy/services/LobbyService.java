@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.ejb.Stateful;
+
 import no.hvl.dat109.proj2.yatzy.entities.Lobby;
 import no.hvl.dat109.proj2.yatzy.entities.Player;
 import no.hvl.dat109.proj2.yatzy.entities.json.LobbyListEntry;
 
+@Stateful
 public class LobbyService {
 	private ConcurrentHashMap<String, Lobby> lobbies;
 	
