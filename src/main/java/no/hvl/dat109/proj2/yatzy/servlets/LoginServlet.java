@@ -1,6 +1,8 @@
 package no.hvl.dat109.proj2.yatzy.servlets;
 
 import java.io.IOException;
+import java.util.Optional;
+
 import no.hvl.dat109.proj2.yatzy.daos.*;
 import no.hvl.dat109.proj2.yatzy.entities.Player;
 import no.hvl.dat109.proj2.yatzy.services.*;
@@ -21,9 +23,9 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	private PlayerDao playerDAO;
+	private PlayerDAO playerDAO;
 
-	
+	@EJB Encryption encryption;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -76,12 +78,18 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		Player player = playerDAO.findUser(username);
+		Optional<Player> player = playerDAO.findPlayerWithUsername(username);
 		
-		if(player != null) {
+		if(player.isPresent()) {
 			
-		boolean validated =	Password.validatePassword(password, player.getPassword());
-			
+				Player playerInstance = player.get();
+				
+				boolean validated =	false;
+				try {		
+				validated = encryption.validatePassword(password, playerInstance.getPassword());
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 		
 				if(validated) {
 						
@@ -97,7 +105,7 @@ public class LoginServlet extends HttpServlet {
 			
 
 			}else {
-			response.sendRedirect("login?errormessage");
+				response.sendRedirect("login?errormessage");
 			}
 		
 	

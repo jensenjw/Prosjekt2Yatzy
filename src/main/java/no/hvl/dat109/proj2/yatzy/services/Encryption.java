@@ -9,8 +9,11 @@ import java.util.Base64;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.xml.bind.DatatypeConverter;
 
+@Stateless
 public class Encryption {
 	final static int SALTLENGTH = 16;
 	final static int ITER = 1000;
