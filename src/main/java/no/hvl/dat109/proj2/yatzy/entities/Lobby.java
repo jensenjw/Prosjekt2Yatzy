@@ -11,6 +11,7 @@ import java.util.List;
 public class Lobby {
 	
 	int id;
+	Player owner;
 	List <Player> players;
 	List <Player> viewers;
 	
@@ -31,6 +32,14 @@ public class Lobby {
 		return id;
 	}
 
+	public Player getOwner() {
+		return owner;
+	}
+	
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+	
 	public List<Player> getPlayers() {
 		return players;
 	}
