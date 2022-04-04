@@ -21,96 +21,95 @@ import javax.ejb.EJB;
 @WebServlet(name = "login", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	private PlayerDAO playerDAO;
 
-	@EJB Encryption encryption;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-       
-    }
+	@EJB
+	Encryption encryption;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * 
-	 * 
-	 * Handles errors and sends user back to the login-page
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//Handle errors
-		
-		if(request.getParameter("errormessage") != null) {
-			request.setAttribute("errormessage","Invalid username and/or password. Try again");
-			
-		}
-		else if(request.getParameter("timeoutmessage") != null) {
-			request.setAttribute("timeoutmessage", "You have been inactive for too long, you will now be logged out");
-		}
-		
-		
-		request.getRequestDispatcher("webapp/login.html").forward(request, response);  
-		
+	public LoginServlet() {
+		super();
+
 	}
 
-	
-	
-	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 * 
+	 * 
+	 *      Handles errors and sends user back to the login-page
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// Handle errors
+
+		if (request.getParameter("errormessage") != null) {
+			request.setAttribute("errormessage", "Invalid username and/or password. Try again");
+
+		} else if (request.getParameter("timeoutmessage") != null) {
+			request.setAttribute("timeoutmessage", "You have been inactive for too long, you will now be logged out");
+		}
+
+		request.getRequestDispatcher("webapp/FrontPage.html").forward(request, response);
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 * 
 	 * 
 	 * 
-	 * Reads username and password. 
-	 * Checks if the input-password equals the password set by the user.
-	 * If password and username is correct, sends the user to "Yatzy-page"
-	 * Else sends an errormessage.
+	 *      Reads username and password. Checks if the input-password equals the
+	 *      password set by the user. If password and username is correct, sends the
+	 *      user to "Yatzy-page" Else sends an errormessage.
 	 * 
 	 * 
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+
+		System.out.println("recieved " + username + " " + password);
 		
 		Optional<Player> player = playerDAO.findPlayerWithUsername(username);
-		
-		if(player.isPresent()) {
-			
-				Player playerInstance = player.get();
-				
-				boolean validated =	false;
-				try {		
+
+		if (player.isPresent()) {
+
+			Player playerInstance = player.get();
+
+			boolean validated = false;
+			try {
 				validated = encryption.validatePassword(password, playerInstance.getPassword());
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-		
-				if(validated) {
-						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			if (validated) {
+
 				HttpSession session = request.getSession(true);
 				session.setMaxInactiveInterval(150);
 				session.setAttribute("player", player);
-				response.sendRedirect("yatzy");
+				response.sendRedirect("Html/MenuPage.html");
+				System.out.println("Fuck YAAAAS");
 				
-				
-						}else {
-						response.sendRedirect("login?errormessage");
-						}
-			
-
-			}else {
-				response.sendRedirect("login?errormessage");
+			} else {
+				response.sendRedirect("?errormessage");
+				System.out.println("Invalid credentials");
 			}
-		
-	
+
+		} else {
+			System.out.println("Invalid user");
+			response.sendRedirect("?errormessage");
+		}
+
 	}
-
-
 
 }

@@ -44,7 +44,7 @@ public class LobbyService {
 		}
 		else {
 			Lobby lobby = new Lobby();
-			lobby.setOwner(owner);
+			lobby.setOwner(owner.getId());
 			lobby.setPlayers(new ArrayList<Player>());
 			lobbies.put(gameId, lobby);
 			return lobby;

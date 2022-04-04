@@ -12,18 +12,18 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(schema = "yatzy", name = "player")
+@Table(schema = "yatzy", name = "scoreCard")
 public class Score {
 	
 	@Id
 	int playerId;
 	
 	// Arraylist for poeng 
-		int [] score;
+	int [] score;
 	
 	// navn for indexene i score tabellen
 	public static final int ONES = 0;
-	public static final int TOWS = 1;
+	public static final int TWOS = 1;
 	public static final int THREES = 2;
 	public static final int FOURS = 3;
 	public static final int FIVES = 4;
@@ -54,8 +54,12 @@ public class Score {
 	}
 	
 	
+	public int getOnes() {
+		return score[ONES];
+	}
 	
-	
-	
+	public int getTwos() {
+		return score[TWOS];
+	}
 
 }

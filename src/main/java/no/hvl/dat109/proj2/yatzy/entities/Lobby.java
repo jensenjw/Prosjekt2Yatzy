@@ -2,17 +2,39 @@ package no.hvl.dat109.proj2.yatzy.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * 
  * @author Eric
  * Lobby er et objekt som holder på liste med spiller og seere
  */
 
+@Entity
+@Table(schema = "yatzy", name = "lobby")
 public class Lobby {
 	
+	@Id
+	@Column(name = "lobbyid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
-	Player owner;
+	
+	
+	@Column(name = "playerid")
+	Integer owner;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "lobby")
 	List <Player> players;
+	
 	List <Player> viewers;
 	
 	/**
@@ -25,18 +47,17 @@ public class Lobby {
 	
 	public Lobby () {
 		
-		
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public Player getOwner() {
+	public Integer getOwner() {
 		return owner;
 	}
 	
-	public void setOwner(Player owner) {
+	public void setOwner(Integer owner) {
 		this.owner = owner;
 	}
 	

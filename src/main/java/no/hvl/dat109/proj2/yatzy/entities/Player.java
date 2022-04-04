@@ -1,9 +1,14 @@
 package no.hvl.dat109.proj2.yatzy.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -17,14 +22,31 @@ public class Player {
 
 
 	@Id
+	@Column(name = "playerid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int playerId; // tregner ikke genere noe verdi for den databasen gjør det selv, bare ha get og set id metodene
+	
+	@Column(name = "username")
 	String username;
+	
+	@Column(name = "password")
 	String password;
+	
+	@Column(name = "name")
 	String fullname;
+	
+	@Column(name = "email")
 	String email;
-	int lobbyId;
+	
+	@ManyToOne
+	@JoinColumn(name = "lobbyid")
+	Lobby lobby;
+	
+	@Column(name = "warnings")
 	int warnings = 0;
-	Score score; 
+	
+	
+	//Score score; 
 
 	/**
 	 * @param playerId er iden på hvilken spiller dette er, altså 1,2,3 eller 4 f.eks
@@ -40,11 +62,18 @@ public class Player {
 
 	
 	public Player () {
-		
+		this.playerId = 0;
+		this.lobby = null;
+		this.username = null;
+		this.password = null;
+		this.fullname = null;
+		this.email = null;
+		this.warnings = 0;
 	}
 	
 
 	public Player(String username, String fullname, String email, String password) {
+		this();
 		this.username = username;
 		this.password = password;
 		this.fullname = fullname;
@@ -55,13 +84,13 @@ public class Player {
 	public int getWarning() {
 		return warnings;
 	}
-	public Score getScore() {
-		return score;
-	}
-
-	public void setScore(Score score) {
-		this.score = score;
-	}
+//	public Score getScore() {
+//		return score;
+//	}
+//
+//	public void setScore(Score score) {
+//		this.score = score;
+//	}
 
 	public int getId() {
 		return playerId;
@@ -101,12 +130,12 @@ public class Player {
 		this.email = email;
 	}
 
-	public int getLobbyId() {
-		return lobbyId;
+	public Lobby getLobby() {
+		return lobby;
 	}
 
-	public void setLobbyId(int lobbyId) {
-		this.lobbyId = lobbyId;
+	public void setLobby(Lobby lobby) {
+		this.lobby = lobby;
 	}
 
 }

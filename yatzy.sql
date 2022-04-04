@@ -6,7 +6,7 @@ CREATE TABLE player
 (
    playerId SERIAL,
    username VARCHAR (20),
-   password CHAR (64),
+   password CHAR (96), -- (16 salt + 32 hash) * 2 chars
    name VARCHAR (10),
    email VARCHAR (20),
    lobbyId INTEGER,
@@ -17,9 +17,9 @@ CREATE TABLE player
 CREATE TABLE lobby
 (
    lobbyId SERIAL,
-   playerId INTEGER,
+   owner INTEGER,
    PRIMARY KEY (lobbyId),
-   FOREIGN KEY (playerId) REFERENCES player (playerId)
+   FOREIGN KEY (owner) REFERENCES player (playerId)
 );
 -- A single players scoreCard, When a player joins a lobby, the scorecard is generated
 CREATE TABLE scoreCard

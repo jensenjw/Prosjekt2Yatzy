@@ -8,6 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
+import org.eclipse.persistence.sessions.Login;
+import org.eclipse.persistence.sessions.Session;
+
 import no.hvl.dat109.proj2.yatzy.entities.Player;
 
 @Stateless

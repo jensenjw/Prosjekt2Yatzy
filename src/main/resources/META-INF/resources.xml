@@ -5,9 +5,10 @@
 		id="Prosjekt2Resources">
 		
 		jdbcDriver = org.postgresql.Driver
-		jdbcUrl = jdbc:postgresql://localhost:5432/dat109
-		userName = postgres
-		password = postgres
+		jdbcUrl = jdbc:postgresql://20.56.240.122:5432/h584969
+		userName = h584969
+		password = pass
+		JtaManaged true
 		<!-- 
 		jdbcDriver = org.postgresql.Driver
 		jdbcUrl = ider-database.westeurope.cloudapp.azure.com:5432
