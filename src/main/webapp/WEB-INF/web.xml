@@ -26,6 +26,12 @@
   	<description></description>
   	<servlet-class>no.hvl.dat109.proj2.yatzy.servlets.GameManagerServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<display-name>LogoutServlet</display-name>
+  	<description></description>
+  	<servlet-class>no.hvl.dat109.proj2.yatzy.servlets.LogoutServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>YatzyBrettServlet</servlet-name>
@@ -35,6 +41,10 @@
   <servlet-mapping>
   	<servlet-name>GameManagerServlet</servlet-name>
   	<url-pattern>/game</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
   
   

@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	private PlayerDao playerDAO;
+	private PlayerDAO playerDAO;
 
 	
        
@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		
-		request.getRequestDispatcher("webapp/login.html").forward(request, response);  
+		request.getRequestDispatcher("webapp/Html/FrontPage.html").forward(request, response);  
 		
 	}
 
@@ -76,11 +76,11 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		Player player = playerDAO.findUser(username);
+		Player player = playerDAO.get(7);
 		
 		if(player != null) {
 			
-		boolean validated =	Password.validatePassword(password, player.getPassword());
+		boolean validated =	Encryption.validatePassword(password, player.getPassword());
 			
 		
 				if(validated) {
