@@ -20,6 +20,7 @@
   	<description></description>
   	<servlet-class>no.hvl.dat109.proj2.yatzy.servlets.YatzyBrettServlet</servlet-class>
   </servlet>
+ 
   <servlet>
   	<servlet-name>GameManagerServlet</servlet-name>
   	<display-name>GameManagerServlet</display-name>
