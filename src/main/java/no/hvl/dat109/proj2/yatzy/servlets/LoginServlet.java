@@ -101,13 +101,13 @@ public class LoginServlet extends HttpServlet {
 				System.out.println("Fuck YAAAAS");
 				
 			} else {
-				response.sendRedirect("?errormessage");
+				response.sendRedirect("/YatzySupreme");
 				System.out.println("Invalid credentials");
 			}
 
 		} else {
-			System.out.println("Invalid user");
-			response.sendRedirect("?errormessage");
+			response.sendRedirect("/YatzySupreme");
+			System.out.println("Invalid account");
 		}
 
 	}

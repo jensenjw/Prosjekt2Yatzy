@@ -1,6 +1,7 @@
 package no.hvl.dat109.proj2.yatzy.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import no.hvl.dat109.proj2.yatzy.daos.PlayerDAO;
 import no.hvl.dat109.proj2.yatzy.entities.Lobby;
 import no.hvl.dat109.proj2.yatzy.entities.Player;
+import no.hvl.dat109.proj2.yatzy.entities.json.LobbyListEntry;
 import no.hvl.dat109.proj2.yatzy.services.LobbyService;
 import no.hvl.dat109.proj2.yatzy.services.SessionUtil;
 
@@ -33,15 +35,20 @@ public class LobbyServlet  extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		
+		List<LobbyListEntry> entries = lobbyService.getLobbyList();
+		
+		req.setAttribute("lobbies", entries);
+		
+		getServletContext().getRequestDispatcher("/WEB-INF/LobbyList.jsp").forward(req, resp);	
 	}
 	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		if (sessionUtil.isLoggedIn(req)) {
-			resp.sendRedirect("");
+			resp.sendRedirect("/YatzySupreme");
 			return;
 		}
 		
@@ -63,7 +70,6 @@ public class LobbyServlet  extends HttpServlet {
 		}
 		else {
 			sessionUtil.setCurrentGameId(req, gameId);
-			
 		}
 		
 		// TODO Auto-generated method stub

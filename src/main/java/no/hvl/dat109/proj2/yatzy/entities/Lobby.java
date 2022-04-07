@@ -29,9 +29,13 @@ public class Lobby {
 	int id;
 	
 	
-	@Column(name = "playerid")
+	@Column(name = "owner")
 	Integer owner;
 	
+	@Column(name = "lobbyname")
+	String lobbyName;
+	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "lobby")
 	List <Player> players;
 	
@@ -78,9 +82,15 @@ public class Lobby {
 	}
 
 
+	public String getGameName() {
+		return lobbyName;
+	}
 
+	public void setGameName(String gameName) {
+		this.lobbyName = gameName;
+	}
 
-	
-	
-
+	public void setId(int id) {
+		this.id = id;
+	}
 }

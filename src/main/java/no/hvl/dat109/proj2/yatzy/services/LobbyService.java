@@ -1,41 +1,41 @@
 package no.hvl.dat109.proj2.yatzy.services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
+import no.hvl.dat109.proj2.yatzy.daos.LobbyDAO;
 import no.hvl.dat109.proj2.yatzy.entities.Lobby;
 import no.hvl.dat109.proj2.yatzy.entities.Player;
 import no.hvl.dat109.proj2.yatzy.entities.json.LobbyListEntry;
 
 @Stateful
 public class LobbyService {
-	private ConcurrentHashMap<String, Lobby> lobbies;
 	
+	
+	@EJB
+	private LobbyDAO lobbyDao;
 	
 	
 	public LobbyService(){
-		lobbies = new ConcurrentHashMap<String, Lobby>();
+		
 	}
 	
 	
 	public Optional<Lobby> tryGetLobby(String gameId){
-		if(lobbies.contains(gameId)) {
-			return Optional.of(lobbies.get(gameId));
-		}
-		else {
-			return Optional.empty();
-		}
+		Lobby lobby = lobbyDao.getLobbyWithGameId(gameId);
+		return lobby != null ? Optional.of(lobby) : Optional.empty();
 	}
 	
 	
 	
-	public ArrayList<LobbyListEntry> getLobbyList() {
-		ArrayList<LobbyListEntry> entries = new ArrayList<LobbyListEntry>();
-		lobbies.entrySet().forEach(x -> entries.add(new LobbyListEntry(x.getKey(), x.getValue())));
-		return entries;
+	public List<LobbyListEntry> getLobbyList() {
+		return lobbyDao.getAllLobbies().stream().map(x -> new LobbyListEntry(x.getGameName(), x)).collect(Collectors.toList());
 	}
 	
 	public Lobby createLobby(String gameId, Player owner) {
@@ -46,7 +46,7 @@ public class LobbyService {
 			Lobby lobby = new Lobby();
 			lobby.setOwner(owner.getId());
 			lobby.setPlayers(new ArrayList<Player>());
-			lobbies.put(gameId, lobby);
+			lobbyDao.tryCreateLobby(lobby);
 			return lobby;
 		}
 	}

@@ -17,6 +17,7 @@ CREATE TABLE player
 CREATE TABLE lobby
 (
    lobbyId SERIAL,
+   lobbyname VARCHAR(40) UNIQUE,
    owner INTEGER,
    PRIMARY KEY (lobbyId),
    FOREIGN KEY (owner) REFERENCES player (playerId)
