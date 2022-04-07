@@ -48,21 +48,22 @@ button:hover {
 	<h2>User login and Registration</h2>
 
 	<div class="container">
-
-		<!-- Tekstfelt for Brukernavn -->
-		<label for="username"><b>Username</b></label> 
-		
-		<input type="text"
-			placeholder="Enter Username" name="username" required>
-
-		<!-- Tekstfelt for passord -->
-		<label for="password"><b>Password</b></label> 
-		
-		<input type="password"
-			placeholder="Enter Password" name="password" required>
-
-		<!-- login knapp -->
-		<button type="submit">Login</button>
+		<form method="post" action="LoginServlet">
+			<!-- Tekstfelt for Brukernavn -->
+			<label for="username"><b>Username</b></label> 
+			
+			<input type="text"
+				placeholder="Enter Username" name="username" required>
+	
+			<!-- Tekstfelt for passord -->
+			<label for="password"><b>Password</b></label> 
+			
+			<input type="password"
+				placeholder="Enter Password" name="password" required>
+	
+			<!-- login knapp -->
+			<button type="submit">Login</button>
+		</form>
 
 		<!-- regestrerings knapp -->
 		<form action="Registration" method="get">

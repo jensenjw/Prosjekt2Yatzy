@@ -1,11 +1,15 @@
 package no.hvl.dat109.proj2.yatzy.daos;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+
+import org.eclipse.persistence.sessions.Login;
+import org.eclipse.persistence.sessions.Session;
 
 import no.hvl.dat109.proj2.yatzy.entities.Player;
 
@@ -45,5 +49,9 @@ public class PlayerDAO {
 			return true;
 		}
 			return false;
+	}
+	
+	public Optional<Player> findPlayerWithUsername(String username){
+		return getAll().stream().filter(x -> x.getUsername().equals(username)).findFirst();
 	}
 }

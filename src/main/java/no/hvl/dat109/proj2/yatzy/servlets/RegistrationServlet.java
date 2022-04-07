@@ -34,6 +34,9 @@ public class RegistrationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		System.out.println(dao.getAll().size());
+		
 		ValidatorService validator = new ValidatorService();
 		Encryption passUtil = new Encryption();
 		boolean allowed = true;
@@ -68,6 +71,7 @@ public class RegistrationServlet extends HttpServlet {
 		String passordrequest = request.getParameter("password");
 		String passordrequest2 = request.getParameter("password2");
 		String encrypted = "";
+		System.out.println(username + " " + fullName + " " + email + " " + passordrequest +" " + passordrequest2);
 		if (passordrequest == null || passordrequest2 == null || !validator.validatePassword(passordrequest)) {
 			allowed = false;
 		} else if (!validator.equalPassword(passordrequest, passordrequest2)) {
@@ -77,14 +81,17 @@ public class RegistrationServlet extends HttpServlet {
 				encrypted = passUtil.encrypt(passordrequest);
 			} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
 				e.printStackTrace();
-				player.setPassword(encrypted);
+				allowed = false;
 			}
 		}
+		
+		player.setPassword(encrypted);
 
 		if (allowed == false) {
 			response.sendRedirect("Registration");
 		} else {
 			LocalStorage ls = new LocalStorage();
+			dao.post(player);
 			ls.addPlayer(player);
 			session.setAttribute("online", "true");
 			request.setAttribute("player", player);

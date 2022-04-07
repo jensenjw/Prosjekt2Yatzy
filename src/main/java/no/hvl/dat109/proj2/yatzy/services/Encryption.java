@@ -9,8 +9,11 @@ import java.util.Base64;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.xml.bind.DatatypeConverter;
 
+@Stateless
 public class Encryption {
 	final static int SALTLENGTH = 16;
 	final static int ITER = 1000;
@@ -20,10 +23,9 @@ public class Encryption {
 		
 	}
 	
-	public String encrypt (String password) throws UnsupportedEncodingException, NoSuchAlgorithmException  {
-		
+	private String encrypt(String password, byte[] salt) throws UnsupportedEncodingException, NoSuchAlgorithmException{
 		char[] passchar = password.toCharArray();
-		byte[] salt = getRandomSalt();
+		
 		byte[] keyhash = null;
 		
 		try {
@@ -33,7 +35,16 @@ public class Encryption {
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			e.printStackTrace();
 		}
-		return DatatypeConverter.printHexBinary(keyhash);
+		
+		byte[] combined = new byte[keyhash.length + salt.length];
+		System.arraycopy(salt, 0, combined, 0, SALTLENGTH);
+		System.arraycopy(keyhash, 0, combined, SALTLENGTH, keyhash.length);
+		
+		return DatatypeConverter.printHexBinary(combined);
+	}
+	
+	public String encrypt (String password) throws UnsupportedEncodingException, NoSuchAlgorithmException  {
+		return encrypt(password, getRandomSalt());
 	}
 	
 	private static byte[] getRandomSalt() {
@@ -53,11 +64,14 @@ public class Encryption {
 	    		throw new IllegalArgumentException("Kryptert passord kan ikke være null");
 	    	}
 	        byte[] salt = extractSalt(kryptert);
-	        return encrypt(password).equals(kryptert);
+	        return encrypt(password, salt).equals(kryptert);
 	    }
 	 
 	 private byte[] extractSalt(String kryptert) {
-	        byte[] saltPlusDigest = Base64.getDecoder().decode(kryptert);
+		 	
+		 	DatatypeConverter.parseHexBinary(kryptert);
+		 	
+	        byte[] saltPlusDigest = DatatypeConverter.parseHexBinary(kryptert);
 	        byte[] salt = Arrays.copyOf(saltPlusDigest, SALTLENGTH);
 	        return salt;
 	    }

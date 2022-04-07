@@ -50,17 +50,18 @@ button:hover {
 
 		
 		<!-- Start et spill knapp -->
-		<form action="Lobby" method="post">
+		<form action="/YatzySupreme/Lobby" method="post">
+			<label for ="gameId">Room Id: </label><input name="gameId" placeholder="room id"/>
 			<button type="submit">Start game</button>
 		</form>
 
 		<!-- Bli med i et spill knapp -->
-		<form action="Lobby" method="get">
+		<form action="/YatzySupreme/Lobby" method="get">
 			<button type="submit">Join game</button>
 		</form>
 		
 		<!-- Log ut knapp -->
-		<form action="logout" method="get">
+		<form action="/YatzySupreme/logout" method="get">
 			<button type="submit">Log out</button>
 		</form>
 		
