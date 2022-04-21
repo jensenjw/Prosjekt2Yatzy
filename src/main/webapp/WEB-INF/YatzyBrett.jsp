@@ -1,3 +1,5 @@
+<%@page import="no.hvl.dat109.proj2.yatzy.entities.Player"%>
+<%@page import="no.hvl.dat109.proj2.yatzy.daos.PlayerDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -18,12 +20,12 @@
 	    	</div>
 	    	<div id="game_panel">
 	    		<h1>Runde: <span id="round_title">En-ere</span></h1>
-	    		<h2 id="cur_player">Kåre</h2>
+	    		<h2 ><span id="cur_player"></span> <span>spiler runden sin</span></h2>
 	    		<div id="game_controllers">
 	    	
 	    			<div id="dice_container">
 	    				<div class="dice" id="1">
-	    				<p>2</p>
+	    				<p id="d1"></p>
 	    				<label for="keep_1">behold?</label>
 	    				<input type="checkbox" name="keep_1">
 	    				</div>
@@ -31,33 +33,33 @@
 	    			
 	    			<div id="dice_container">
 	    				<div class="dice" id="2">
-	    				<p>2</p>
-	    				<label for="keep_1">behold?</label>
-	    				<input type="checkbox" name="keep_1">
+	    				<p id="d2"></p>
+	    				<label for="keep_2">behold?</label>
+	    				<input type="checkbox" name="keep_2">
 	    				</div>
 	    			</div>
 	    			
 	    			<div id="dice_container">
 	    				<div class="dice" id="3">
-	    				<p>2</p>
-	    				<label for="keep_1">behold?</label>
-	    				<input type="checkbox" name="keep_1">
+	    				<p id="d3"></p>
+	    				<label for="keep_3">behold?</label>
+	    				<input type="checkbox" name="keep_3">
 	    				</div>
 	    			</div>
 	    			
 	    			<div id="dice_container">
 	    				<div class="dice" id="4">
-	    				<p>2</p>
-	    				<label for="keep_1">behold?</label>
-	    				<input type="checkbox" name="keep_1">
+	    				<p id="d4"></p>
+	    				<label for="keep_4">behold?</label>
+	    				<input type="checkbox" name="keep_4">
 	    				</div>
 	    			</div>
 	    			
 	    			<div id="dice_container">
 	    				<div class="dice" id="5">
-	    				<p>2</p>
-	    				<label for="keep_1">behold?</label>
-	    				<input type="checkbox" name="keep_1">
+	    				<p id="d5"></p>
+	    				<label for="keep_5">behold?</label>
+	    				<input type="checkbox" name="keep_5">
 	    				</div>
 	    			</div>
 	    			
@@ -76,7 +78,7 @@
 			 for (final String x : (ArrayList<String>)request.getAttribute("players")){
 				out.println('"' + x + "\",");
 			 }
-			 %>]
+			 %>],"<% out.print(((Player)request.getSession(false).getAttribute("player")).getUsername());%>"
         	);
         </script>
     </body>

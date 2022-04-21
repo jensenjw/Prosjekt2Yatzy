@@ -7,10 +7,15 @@ import java.util.List;
  * @author janwi
  *	Uses ruleOnePair twice by removing the dices from the first pair
  */
-public class RuleTwoPair extends RuleOnePair {
+public class RuleTwoPair extends RuleOnePair implements RulesADT {
 
 	public int resolveTwoPair(List<Integer> list) {
-		return calculate(list) + calculate(list);
+		return super.calculate(list) + super.calculate(list);
 	}
 
+	
+	@Override
+	public int calculate(List<Integer> list) {
+		return resolveTwoPair(list);
+	}
 }

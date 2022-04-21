@@ -37,10 +37,7 @@ public class Player {
 	
 	@Column(name = "email")
 	String email;
-	
-	@ManyToOne
-	@JoinColumn(name = "lobbyid")
-	Lobby lobby;
+
 	
 	@Column(name = "warnings")
 	int warnings = 0;
@@ -63,7 +60,6 @@ public class Player {
 	
 	public Player () {
 		this.playerId = 0;
-		this.lobby = null;
 		this.username = null;
 		this.password = null;
 		this.fullname = null;
@@ -84,13 +80,6 @@ public class Player {
 	public int getWarning() {
 		return warnings;
 	}
-//	public Score getScore() {
-//		return score;
-//	}
-//
-//	public void setScore(Score score) {
-//		this.score = score;
-//	}
 
 	public int getId() {
 		return playerId;
@@ -129,13 +118,4 @@ public class Player {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public Lobby getLobby() {
-		return lobby;
-	}
-
-	public void setLobby(Lobby lobby) {
-		this.lobby = lobby;
-	}
-
 }

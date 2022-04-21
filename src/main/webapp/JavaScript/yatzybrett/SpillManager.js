@@ -1,4 +1,4 @@
-function start(players){
+function start(players, you){
     const ROUND_NAMES = [
         "En-ere",
         "To-ere",
@@ -13,6 +13,7 @@ function start(players){
         "4 Like",
         "Liten Straight",
         "Stor Straight",
+		"Hus",
         "Sjanse",
         "Yatzy",
         "Sum"
@@ -24,10 +25,22 @@ function start(players){
         board_body.appendChild(create_header_row(players));
         for (const x in ROUND_NAMES){
             const name = ROUND_NAMES[x];
-            const row = document.createElement("tr");
+			
+			if (name === "Bonus"){
+				const row = document.createElement("tr");
+				const title = row.appendChild(document.createElement("td"));
+				title.innerText = "Sum";
+				 for (let i = 0; i < player_count; i++){
+	                const cell = row.appendChild(document.createElement("td"));
+	                cell.id = "score_" + players[i] + "_SumBonus";
+            	}
+				board_body.appendChild(row);
+			}
+	
+			const row = document.createElement("tr");
             const title = row.appendChild(document.createElement("td"));
             title.innerText = name;
-
+			
             for (let i = 0; i < player_count; i++){
                 const cell = row.appendChild(document.createElement("td"));
                 cell.id = "score_" + players[i] + "_" + x;
@@ -70,7 +83,7 @@ function start(players){
                 content = xhttp.responseText;
             }
         }
-        if (body != null || body != undefined)
+        if (body != null && body != undefined)
         {
             xhttp.send(body);
         }
@@ -84,7 +97,7 @@ function start(players){
         const json = send_http_request("GET","game");
 
         const obj = JSON.parse(json);
-
+	
         for (const x in obj.scores){
             for (const y in obj.scores[x]){
                 const id = "score_" + x + "_" + y;
@@ -96,6 +109,24 @@ function start(players){
                 }
             }
         }
+
+		
+		document.getElementById("round_title").innerText = ROUND_NAMES[obj.curRound];
+		document.getElementById("cur_player").innerText = obj.curPlayer;
+
+		if (obj.curPlayer == you){
+			 document.getElementById("roll").style.display = "block";
+		}
+		else{
+			 document.getElementById("roll").style.display = "none";	
+		}
+		
+		if (ROUND_NAMES[obj.curRound] == "Bonus"){
+			document.getElementById("roll").innerText = "Hent bonus";
+		}
+		else{
+			document.getElementById("roll").innerText = "Rull terninger";
+		}
     }
 
     function get_keep_checkbox(name){
@@ -108,18 +139,37 @@ function start(players){
 
     function get_keep_states(){
         return [
-            get_keep_checkbox("keep_1").value,
-            get_keep_checkbox("keep_2").value,
-            get_keep_checkbox("keep_3").value,
-            get_keep_checkbox("keep_4").value,
-            get_keep_checkbox("keep_5").value,
+            get_keep_checkbox("keep_1").checked,
+            get_keep_checkbox("keep_2").checked,
+            get_keep_checkbox("keep_3").checked,
+            get_keep_checkbox("keep_4").checked,
+            get_keep_checkbox("keep_5").checked,
         ]
     }
 
     function roll_dices(){
-        send_http_request("POST","game?act=roll",{
+		console.log("rolling");
+		var body = JSON.stringify({
             keep: get_keep_states()
         });
+
+		console.log("sending",body)
+        let response = send_http_request("POST","game?act=roll",body);
+	
+		console.log(response);
+	
+		var obj = JSON.parse(response);
+		
+		if (document.getElementById("roll").innerText !== "Rull terninger"){
+			document.getElementById("score_"+you+"_SumBonus").innerText = obj.dices[0];
+			document.getElementById("score_"+you+"_Bonus").innerText = obj.dices[1];
+			
+		}
+		else{
+			for (let i = 1; i < 6; i++){
+				document.getElementById("d" + i).innerText = obj.dices[i-1];
+			}	
+		}
     }
 
     //MAIN LOGIC

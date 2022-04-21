@@ -11,6 +11,10 @@
     min-width: fit-content;
 }
 
+#game_panel{
+	margin-left: 10px;
+}
+
 #game_panel>h1,#game_panel>h2{
     text-align: center;
 }
