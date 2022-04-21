@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 
 	@EJB
 	private PlayerDAO playerDAO;
-
+	
 	@EJB
 	Encryption encryption;
 
@@ -95,13 +95,19 @@ public class LoginServlet extends HttpServlet {
 			if (validated) {
 
 				HttpSession session = request.getSession(true);
-				session.setMaxInactiveInterval(150);
-				session.setAttribute("player", player);
-				response.sendRedirect("Html/MenuPage.html");
+				session.setMaxInactiveInterval(3600);
+				session.setAttribute("player", player.get());
+				
+				if (playerDAO.getCurrentLobbyIdForPlayer(player.get()).isPresent()) {
+					response.sendRedirect("/YatzySupreme/WaitRoom");
+				}
+				else {
+					response.sendRedirect(response.encodeRedirectURL("Html/MenuPage.html"));
+				}
 				System.out.println("Fuck YAAAAS");
 				
 			} else {
-				response.sendRedirect("/YatzySupreme");
+				response.sendRedirect(response.encodeRedirectURL("/YatzySupreme"));
 				System.out.println("Invalid credentials");
 			}
 

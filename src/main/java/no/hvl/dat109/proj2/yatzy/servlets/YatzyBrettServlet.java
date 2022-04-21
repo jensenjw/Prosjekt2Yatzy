@@ -2,6 +2,9 @@ package no.hvl.dat109.proj2.yatzy.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.OptionalInt;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -10,6 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import no.hvl.dat109.proj2.yatzy.daos.LobbyDAO;
+import no.hvl.dat109.proj2.yatzy.daos.PlayerDAO;
+import no.hvl.dat109.proj2.yatzy.entities.GameAssosiation;
+import no.hvl.dat109.proj2.yatzy.entities.Player;
+import no.hvl.dat109.proj2.yatzy.services.LobbyService;
 import no.hvl.dat109.proj2.yatzy.services.SessionUtil;
 
 /**
@@ -21,6 +29,15 @@ public class YatzyBrettServlet extends HttpServlet {
 	
 	@EJB
 	private SessionUtil sessionUtil;
+	
+	@EJB
+	private PlayerDAO playerDao;
+	
+	@EJB
+	private LobbyService lobbyService;
+	
+	@EJB
+	private LobbyDAO lobbyDao;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,19 +54,24 @@ public class YatzyBrettServlet extends HttpServlet {
 		
 		//TODO: det må assosieres et spill med en bruker,
 	
+		Player player = sessionUtil.getPlayer(request);
+		if (player == null) {
+			response.sendRedirect("/YatzySupreme/");
+		}
+		
+		OptionalInt lobbyId = playerDao.getCurrentLobbyIdForPlayer(sessionUtil.getPlayer(request));
+		
 		String gameId = sessionUtil.getCurrentGameId(request);
 		
-		if (false) {
-			response.encodeRedirectURL("/");
+		if (lobbyId.isEmpty()) {
+			response.encodeRedirectURL("/YatzySupreme/Html/MenuPage.html");
 		}
 		else {
-			ArrayList<String> players = new ArrayList<String>();
+			List<GameAssosiation> players = lobbyDao.GetAllGameAssosiations(lobbyService.getLobby(lobbyId.getAsInt()));
 			
-			players.add("Geir");
-			players.add("Knut");
-			players.add("Kåre");
+			request.setAttribute("players",players.stream().map(x -> playerDao.get(x.getPlayerId()).getUsername()).collect(Collectors.toList()));
 			
-			request.setAttribute("players",players);
+			
 			getServletContext().getRequestDispatcher("/WEB-INF/YatzyBrett.jsp").forward(request, response);
 		}
 	}

@@ -5,6 +5,11 @@ public class Dice {
 	int value;
 	
 	public int rollDice() {
-		return (int) (Math.floor(Math.random() * 6) + 1);
+		this.value = (int) (Math.floor(Math.random() * 6) + 1);
+		return value;
+	}
+	
+	public int getValue() {
+		return value;
 	}
 }

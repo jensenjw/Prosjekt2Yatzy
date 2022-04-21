@@ -2,6 +2,8 @@ package no.hvl.dat109.proj2.yatzy.servlets;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -36,6 +38,12 @@ public class LobbyServlet  extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		if (!sessionUtil.isLoggedIn(req)) {
+			System.out.println("Not Logged In");
+			resp.sendRedirect("/YatzySupreme");
+			return;
+		}
+		
 		List<LobbyListEntry> entries = lobbyService.getLobbyList();
 		
 		req.setAttribute("lobbies", entries);
@@ -47,21 +55,32 @@ public class LobbyServlet  extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		if (sessionUtil.isLoggedIn(req)) {
+		if (!sessionUtil.isLoggedIn(req)) {
+			System.out.println("Not Logged In");
 			resp.sendRedirect("/YatzySupreme");
 			return;
 		}
 		
-		String username = sessionUtil.getPlayerName(req);
-		if (sessionUtil.getCurrentGameId(req) != null) {
-			resp.sendRedirect("Lobby");
+		Player player = sessionUtil.getPlayer(req);
+	
+		if (player == null) {
+			System.out.println("Not Logged In");
+			resp.sendRedirect("/YatzySupreme");
 			return;
 		}
 		
+		OptionalInt curLobby = playerDao.getCurrentLobbyIdForPlayer(player);
+		
+		if (curLobby.isPresent()) {
+			resp.sendRedirect("WaitRoom");
+			return;
+		}
+	
 		String gameId = req.getParameter("gameId");
 		
-		//TODO: redirect the username is invalid
-		Player player = playerDao.findPlayerWithUsername(username).get();
+		if (gameId == null) {
+			resp.sendRedirect("/YatzySupreme/Html/MenuPage.html");
+		}
 		
 		Lobby created = lobbyService.createLobby(gameId, player);
 		
@@ -69,10 +88,9 @@ public class LobbyServlet  extends HttpServlet {
 			resp.sendRedirect("Lobby");
 		}
 		else {
-			sessionUtil.setCurrentGameId(req, gameId);
+			resp.sendRedirect("WaitRoom");
 		}
 		
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		
 	}
 }

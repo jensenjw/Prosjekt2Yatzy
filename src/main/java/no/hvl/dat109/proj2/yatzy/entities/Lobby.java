@@ -35,11 +35,12 @@ public class Lobby {
 	@Column(name = "lobbyname")
 	String lobbyName;
 	
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "lobby")
-	List <Player> players;
+	@Column(name = "curPlayer")
+	int curPlayer;
 	
-	List <Player> viewers;
+	@Column(name = "curRound")
+	int curRound;
+
 	
 	/**
 	 * @param id er id til lobbyene
@@ -64,33 +65,33 @@ public class Lobby {
 	public void setOwner(Integer owner) {
 		this.owner = owner;
 	}
-	
-	public List<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List<Player> players) {
-		this.players = players;
-	}
-
-	public List<Player> getViewers() {
-		return viewers;
-	}
-
-	public void setViewers(List<Player> viewers) {
-		this.viewers = viewers;
-	}
 
 
-	public String getGameName() {
+	public String getLobbyName() {
 		return lobbyName;
 	}
 
-	public void setGameName(String gameName) {
+	public void setLobbyName(String gameName) {
 		this.lobbyName = gameName;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getCurPlayer() {
+		return curPlayer;
+	}
+
+	public void setCurPlayer(int curPlayer) {
+		this.curPlayer = curPlayer;
+	}
+
+	public int getCurRound() {
+		return curRound;
+	}
+
+	public void setCurRound(int curRound) {
+		this.curRound = curRound;
 	}
 }

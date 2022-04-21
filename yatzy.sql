@@ -9,7 +9,6 @@ CREATE TABLE player
    password CHAR (96), -- (16 salt + 32 hash) * 2 chars
    name VARCHAR (10),
    email VARCHAR (20),
-   lobbyId INTEGER,
    warnings INTEGER,
    PRIMARY KEY (playerId)
 );
@@ -19,6 +18,8 @@ CREATE TABLE lobby
    lobbyId SERIAL,
    lobbyname VARCHAR(40) UNIQUE,
    owner INTEGER,
+   curPlayer INTEGER NOT NULL,
+   curRound INTEGER NOT NULL,
    PRIMARY KEY (lobbyId),
    FOREIGN KEY (owner) REFERENCES player (playerId)
 );
@@ -62,5 +63,17 @@ CREATE TABLE scoreCard
    FOREIGN KEY (playerId) REFERENCES player (playerId)
 );
 
-ALTER TABLE player
-ADD FOREIGN KEY (lobbyId) REFERENCES lobby(lobbyId)
+
+CREATE TABLE gameAssosiation(
+	lobbyId INTEGER NOT NULL,
+	playerId INTEGER UNIQUE NOT NULL,
+	sequenceNum SERIAL,
+	
+	PRIMARY KEY (lobbyId, playerId),
+	FOREIGN KEY (lobbyId) REFERENCES lobby (lobbyId)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	FOREIGN KEY (playerId) REFERENCES player (playerId)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
